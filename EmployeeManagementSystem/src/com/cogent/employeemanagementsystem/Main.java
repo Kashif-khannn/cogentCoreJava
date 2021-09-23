@@ -1,7 +1,8 @@
 package com.cogent.employeemanagementsystem;
 import com.cogent.employeemanagementsystem.model.*;
-import com.cogent.employeemanagementsystem.repository.EmployeeRepository;
+import com.cogent.employeemanagementsystem.repository.EmployeeRepositoryImpl;
 import com.cogent.employeemanagementsystem.service.EmployeeService;
+import com.cogent.employeemanagementsystem.service.EmployeeServiceImpl;
 public class Main {
 
 	public static void main(String [] args) {
@@ -27,11 +28,24 @@ public class Main {
 //		for (Employee employee4: employees) {
 //			System.out.println(employee4);
 //		}
-		EmployeeService employeeService = new EmployeeService();
-		Employee employee = new Employee("ab001", "abhi", "chivate", 123.0f, "PA");
+		
+		EmployeeService employeeService =  EmployeeServiceImpl.getInstance();
+		Employee employee = new Employee("ab001", "abhi", "chivate", 123.0f);
 		String result = employeeService.addEmployee(employee);
 		System.out.println(result);
-		employeeService.getEmployeeById("ab001");
+		
+		Employee [] employees = employeeService.getEmployees();
+		
+		
+		for(Employee employee2: employees) {
+			System.out.println(employee2);
+		}
+		employeeService.getEmployeesByName("Kashif");
+		 employeeService.updateEmployees("kashif", employee);
+	    employeeService.deleteAllEmployees();
+		
+		
+		
 		
 	}
 }
