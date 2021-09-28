@@ -1,5 +1,8 @@
 package com.cogent.employeemanagementsystem.repository;
 
+import java.io.IOException;
+
+import com.cogent.employeemanagementsystem.exception.IdNotFoundException;
 import com.cogent.employeemanagementsystem.model.Employee;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository{
@@ -30,19 +33,23 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
 		return "Success";
 		
 }
-	public Employee getEmployeeById(String id) {
+	public Employee getEmployeeById(String id) throws IdNotFoundException, IOException{
+		// to throw the checked exception to the caller
 		for (Employee employee: employees) {
 			if(employee !=null && id.equals(employee.getEmployeeId()) ) {
+				//throw new IOException();
 				return employee;
 			}
 		}
-		return null;
+		//return null;
+		// idnot found exception?
+		throw new IdNotFoundException("id not found");
 		
 	}
 	public Employee [] getEmployees() {
 		return employees;
 	}
-	public String deleteEmployeeById(String id) {
+	public String deleteEmployeeById(String id) throws IdNotFoundException, IOException {
 		// 1. that id exists or not 
 		Employee employee = this.getEmployeeById(id);
 		if(employee != null) {
@@ -81,7 +88,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
 	}
 
 	@Override
-	public String updateEmployees(String id, Employee employee) {
+	public String updateEmployees(String id, Employee employee) throws IdNotFoundException, IOException {
 		
 			this.getEmployeeById(id);
 			

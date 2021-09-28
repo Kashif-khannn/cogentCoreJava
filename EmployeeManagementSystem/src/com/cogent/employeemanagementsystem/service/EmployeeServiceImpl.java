@@ -1,5 +1,8 @@
 package com.cogent.employeemanagementsystem.service;
 
+import java.io.IOException;
+
+import com.cogent.employeemanagementsystem.exception.IdNotFoundException;
 import com.cogent.employeemanagementsystem.model.Employee;
 import com.cogent.employeemanagementsystem.repository.EmployeeRepository;
 import com.cogent.employeemanagementsystem.repository.EmployeeRepositoryImpl;
@@ -27,32 +30,33 @@ public class EmployeeServiceImpl implements EmployeeService{
 				
 	}
 	
-	public Employee getEmployeeById(String id) {
+	public Employee getEmployeeById(String id) throws IdNotFoundException, IOException {
 		return employeeRepository.getEmployeeById(id);
 	}
 	public Employee [] getEmployees() {
 		return employeeRepository.getEmployees();
 	}
 	@Override
-	public String deleteEmployeeById(String id) {
+	public String deleteEmployeeById(String id) throws IdNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		return null;
+		return employeeRepository.deleteEmployeeById(id);
 	}
 	@Override
 	public void deleteAllEmployees() {
 		// TODO Auto-generated method stub
+		employeeRepository.deleteAllEmployees();
 		
 	}
 	@Override
-	public String updateEmployees(String id, Employee employee) {
+	public String updateEmployees(String id, Employee employee) throws IdNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		return null;
+		return employeeRepository.updateEmployees(id, employee);
 	}
 
 	@Override
 	public Employee[] getEmployeesByName(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		return employeeRepository.getEmployees();
 	}
 
 }

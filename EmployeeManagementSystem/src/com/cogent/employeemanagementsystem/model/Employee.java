@@ -14,6 +14,7 @@ public class Employee {
 	}
 
 	public void setEmployeeId(String employeeId) {
+		
 		this.employeeId = employeeId;
 	}
 
@@ -37,8 +38,15 @@ public class Employee {
 		return empSalary;
 	}
 
-	public void setEmpSalary(float empSalary) {
-		this.empSalary = empSalary;
+	public void setEmpSalary(float empSalary) throws InvalidSalaryException {
+		// for unchecked exception we only responsible for throw not throws in the method def
+		// salary is not negative
+		// if salary is negative raise InvalidSalary Exception
+		if(empSalary>0) {
+			this.empSalary = empSalary;
+		} else {
+			throw new InvalidSalaryException("Negative salary entered ");
+		}
 	}
 
 	public String getAddress() {
@@ -55,7 +63,7 @@ public class Employee {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.empSalary = empSalary;
+		this.setEmpSalary(empSalary);
 	}
 
 	private String employeeId;
